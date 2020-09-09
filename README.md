@@ -1,3 +1,3 @@
 # Logat
 
-Simple Logging Library for your `.NET` project
+Simple Logging Library for your `.NET C#` project
