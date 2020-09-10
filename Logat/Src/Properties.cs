@@ -2,13 +2,13 @@ using System;
 
 namespace TelkomDev.Logat
 {
-    public enum Target {
+    public enum Target: byte {
         Console,
         File,
         Logstash
     }
 
-    public enum Level {
+    public enum Level: byte {
         INFO,
         DEBUG,
         ERROR,
