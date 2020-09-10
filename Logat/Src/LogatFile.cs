@@ -29,6 +29,9 @@ namespace TelkomDev.Logat
                 FileInfo fileInfo = new FileInfo(fileName);
                 FileStream fileStream = fileInfo.Open(FileMode.Append, FileAccess.Write, FileShare.Read);
                 fileOutput = new StreamWriter(fileStream, Encoding.UTF8);
+
+                /// flush buffer
+                fileOutput.AutoFlush = true;
             }
             catch (IOException e)
             {
@@ -48,10 +51,9 @@ namespace TelkomDev.Logat
             lock (locker)
             {
                 var timestamp = DateTime.Now.ToString(Constant.DateFormat);
-
-                ///fileOutput.AutoFlush = true;
-                Console.SetOut(fileOutput);
                 
+                Console.SetOut(fileOutput);
+
                 var log = new Log();
                 log.AppName = appName;
                 log.Timestamp = timestamp;
