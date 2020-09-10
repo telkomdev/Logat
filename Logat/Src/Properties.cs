@@ -22,4 +22,9 @@ namespace TelkomDev.Logat
         PLAIN,
         JSON
     }
+
+    static class Constant
+    {
+        public const string DateFormat = "yyyy-mm-dd h:mm:ss";
+    }
 }
