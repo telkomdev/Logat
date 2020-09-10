@@ -8,10 +8,15 @@ namespace TelkomDev.Logat
     {
         private string appName;
         private Format format;
+
+        private StreamWriter standardOutput = null;
         public LogatConsole(string appName, Format format)
         {
             this.appName = appName;
             this.format = format;
+
+            standardOutput = new StreamWriter(Console.OpenStandardOutput());
+            standardOutput.AutoFlush = true;
         }
 
         public override void Log(Level level, string message)
@@ -35,9 +40,6 @@ namespace TelkomDev.Logat
                 }
 
                 var timestamp = DateTime.Now.ToString(Constant.DateFormat);
-
-                var standardOutput = new StreamWriter(Console.OpenStandardOutput());
-                standardOutput.AutoFlush = true;
                 Console.SetOut(standardOutput);
 
                 var log = new Log();
