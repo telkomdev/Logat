@@ -6,7 +6,6 @@ namespace TelkomDev.Logat
         /// ensure only one thread accesses Log() method
         protected readonly object locker = new object();
         public abstract void Log(Level level, string message);
-
         public abstract void Close();
     }
 }

@@ -31,7 +31,7 @@ namespace TelkomDev.Logat
                         break;
                 }
 
-                var datetime = DateTime.Now.ToString("yyyy-mm-dd h:mm:ss");
+                var datetime = DateTime.Now.ToString(Constant.DateFormat);
 
                 var standardOutput = new StreamWriter(Console.OpenStandardOutput());
                 standardOutput.AutoFlush = true;
@@ -43,7 +43,7 @@ namespace TelkomDev.Logat
 
         public override void Close()
         {
-            
+
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Text;
 
 namespace TelkomDev.Logat
 {
@@ -14,25 +15,42 @@ namespace TelkomDev.Logat
             this.appName = appName;
             this.fileName = fileName;
 
+           OpenLogFile();
+        }
+
+        private void OpenLogFile()
+        {
             try
             {
-                fileOutput = new StreamWriter(fileName, true);
+                //fileName = $"/var/log/{appName}.log";
+                FileInfo fileInfo = new FileInfo(fileName);
+                FileStream fileStream = fileInfo.Open(FileMode.Append, FileAccess.Write, FileShare.Read);
+                fileOutput = new StreamWriter(fileStream, Encoding.UTF8);
             }
-            catch (Exception e)
+            catch (IOException e)
             {
-                throw new IOException(e.ToString());
+                throw e;
             }
+        }
+
+        private void ResetOutputToDefault()
+        {
+            var sw = new StreamWriter(Console.OpenStandardOutput());
+            sw.AutoFlush = true;
+            Console.SetOut(sw);
         }
 
         public override void Log(Level level, string message)
         {
             lock (locker)
             {
-                var datetime = DateTime.Now.ToString("yyyy-mm-dd h:mm:ss");
+                var datetime = DateTime.Now.ToString(Constant.DateFormat);
 
                 ///fileOutput.AutoFlush = true;
                 Console.SetOut(fileOutput);
                 Console.WriteLine("[{0}] {1} {2} {3}", appName, datetime, level.ToString(), message);
+
+                ResetOutputToDefault();
             }
         }
 
