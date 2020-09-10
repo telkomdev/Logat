@@ -10,7 +10,15 @@ namespace TelkomDev.Logat
 
         public override void Log(Level level, string message)
         {
-            throw new System.NotImplementedException();
+            lock (locker)
+            {
+                
+            }
+        }
+
+        public override void Close()
+        {
+            
         }
     }
 }
