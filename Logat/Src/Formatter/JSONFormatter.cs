@@ -1,4 +1,5 @@
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace TelkomDev.Logat
 {
@@ -6,7 +7,11 @@ namespace TelkomDev.Logat
     {
         public string Format(Log log)
         {
-            return JsonConvert.SerializeObject(log, Formatting.None);
+            var options = new JsonSerializerOptions() 
+            {
+                WriteIndented = false
+            };
+            return JsonSerializer.Serialize(log, options);
         }
     }
 }

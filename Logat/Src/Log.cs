@@ -1,19 +1,19 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace TelkomDev.Logat
 {
     class Log
     {
-        [JsonProperty("appName")]
+        [JsonPropertyName("appName")]
         public string AppName {get; set;}
 
-        [JsonProperty("timestamp")]
+        [JsonPropertyName("timestamp")]
         public string Timestamp {get; set;}
 
-        [JsonProperty("level")]
+        [JsonPropertyName("level")]
         public string Level {get; set;}
 
-        [JsonProperty("message")]
+        [JsonPropertyName("message")]
         public string Message {get; set;}
         public Log()
         {
