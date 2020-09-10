@@ -35,6 +35,7 @@ namespace TelkomDev.Logat
             standardOutput.AutoFlush = true;
             Console.SetOut(standardOutput);
             Console.WriteLine("[{0}] {1} {2} {3}", appName, datetime, level.ToString(), message);
+            Console.ResetColor();
         }
     }
 }
