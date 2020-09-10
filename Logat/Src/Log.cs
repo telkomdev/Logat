@@ -15,6 +15,7 @@ namespace TelkomDev.Logat
 
         [JsonPropertyName("message")]
         public string Message {get; set;}
+        
         public Log()
         {
 

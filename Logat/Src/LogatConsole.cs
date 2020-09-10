@@ -52,13 +52,18 @@ namespace TelkomDev.Logat
                 string output = LogFormatter.Format(format, log);
 
                 Console.WriteLine(output);
-                Console.ResetColor();
+                this.Reset();
             }
         }
 
         public override void Close()
         {
 
+        }
+
+        protected override void Reset()
+        {
+            Console.ResetColor();
         }
     }
 }

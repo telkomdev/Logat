@@ -38,13 +38,6 @@ namespace TelkomDev.Logat
             }
         }
 
-        private void ResetOutputToDefault()
-        {
-            var sw = new StreamWriter(Console.OpenStandardOutput());
-            sw.AutoFlush = true;
-            Console.SetOut(sw);
-        }
-
         public override void Log(Level level, string message)
         {
             lock (locker)
@@ -63,7 +56,7 @@ namespace TelkomDev.Logat
                 string output = LogFormatter.Format(format, log);
 
                 Console.WriteLine(output);
-                ResetOutputToDefault();
+                Reset();
             }
         }
 
@@ -73,6 +66,13 @@ namespace TelkomDev.Logat
             {
                 fileOutput.Close();
             }
+        }
+
+        protected override void Reset()
+        {
+            var sw = new StreamWriter(Console.OpenStandardOutput());
+            sw.AutoFlush = true;
+            Console.SetOut(sw);
         }
     }
 }

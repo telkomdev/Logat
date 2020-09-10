@@ -20,5 +20,10 @@ namespace TelkomDev.Logat
         {
             
         }
+
+        protected override void Reset()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
