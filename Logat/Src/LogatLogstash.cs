@@ -3,7 +3,7 @@ namespace TelkomDev.Logat
     class LogatLogstash : AbstractLogat
     {
         private string appName;
-        public LogatLogstash(string appName)
+        public LogatLogstash(string appName, Format format)
         {
             this.appName = appName;
         }

@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace TelkomDev.Logat
 {
@@ -8,12 +9,14 @@ namespace TelkomDev.Logat
     {
         private string appName;
         private string fileName;
+        private Format format;
 
-        private StreamWriter fileOutput;
-        public LogatFile(string appName, string fileName)
+        private StreamWriter fileOutput = null;
+        public LogatFile(string appName, string fileName, Format format)
         {
             this.appName = appName;
             this.fileName = fileName;
+            this.format = format;
 
            OpenLogFile();
         }
@@ -44,12 +47,20 @@ namespace TelkomDev.Logat
         {
             lock (locker)
             {
-                var datetime = DateTime.Now.ToString(Constant.DateFormat);
+                var timestamp = DateTime.Now.ToString(Constant.DateFormat);
 
                 ///fileOutput.AutoFlush = true;
                 Console.SetOut(fileOutput);
-                Console.WriteLine("[{0}] {1} {2} {3}", appName, datetime, level.ToString(), message);
+                
+                var log = new Log();
+                log.AppName = appName;
+                log.Timestamp = timestamp;
+                log.Level = level.ToString();
+                log.Message = message;
+                
+                string output = LogFormatter.Format(format, log);
 
+                Console.WriteLine(output);
                 ResetOutputToDefault();
             }
         }
