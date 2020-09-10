@@ -41,11 +41,13 @@ namespace TelkomDev.Logat
                 var timestamp = DateTime.Now.ToString(Constant.DateFormat);
                 Console.SetOut(standardOutput);
 
-                var log = new Log();
-                log.AppName = appName;
-                log.Timestamp = timestamp;
-                log.Level = level.ToString();
-                log.Message = message;
+                var log = new Log(){
+                    AppName = appName,
+                    Timestamp = timestamp,
+                    Level = level.ToString(),
+                    Message = message
+                };
+                
                 
                 string output = LogFormatter.Format(format, log);
 

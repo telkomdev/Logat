@@ -53,11 +53,12 @@ namespace TelkomDev.Logat
                 
                 Console.SetOut(fileOutput);
 
-                var log = new Log();
-                log.AppName = appName;
-                log.Timestamp = timestamp;
-                log.Level = level.ToString();
-                log.Message = message;
+                var log = new Log(){
+                    AppName = appName,
+                    Timestamp = timestamp,
+                    Level = level.ToString(),
+                    Message = message
+                };
                 
                 string output = LogFormatter.Format(format, log);
 
